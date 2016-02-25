@@ -1,0 +1,17 @@
+program Project1;
+
+uses
+  Vcl.Forms,
+  Unit1 in '..\..\..\..\..\Documents\Embarcadero\Studio\Projects\Unit1.pas' {Form1},
+  Excel_TLB in '..\..\..\..\..\Documents\Embarcadero\Studio\17.0\Imports\Excel_TLB.pas',
+  Graph_TLB in '..\..\..\..\..\Documents\Embarcadero\Studio\17.0\Imports\Graph_TLB.pas',
+  Office_TLB in '..\..\..\..\..\Documents\Embarcadero\Studio\17.0\Imports\Office_TLB.pas';
+
+{$R *.res}
+
+begin
+  Vcl.Forms.Application.Initialize;
+  Vcl.Forms.Application.MainFormOnTaskbar := True;
+  Vcl.Forms.Application.CreateForm(TForm1, Form1);
+  Vcl.Forms.Application.Run;
+end.

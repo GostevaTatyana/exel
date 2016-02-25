@@ -1,0 +1,147 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs,ComObj,math,graph_tlb,Vcl.StdCtrls,VBIDE_TLB,office_tlb,excel_tlb,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    Edit1: TEdit;
+    Edit2: TEdit;
+    Edit3: TEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label3: TLabel;
+    Button1: TButton;
+    Image1: TImage;
+    procedure Edit1KeyPress(Sender: TObject; var Key: Char);
+    procedure Button1Click(Sender: TObject);
+
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+
+
+implementation
+
+{$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+var col:char;
+    row,i:integer;
+    x1,x2,dx,x,y1:extended;
+    ExcelApp: ExcelApplication;
+    Sheet: ExcelWorksheet;
+    refstyle:xlReferenceStyle;
+    masx,masy:array of extended;
+    masshape:Shape;
+    mAxis:Axis;
+    exchart: ExcelChart;
+    MyDisp: IDispatch;
+begin
+ExcelApp := CreateOleObject('Excel.Application') as ExcelApplication;
+ExcelApp.Visible[0] := True;
+ExcelApp.Workbooks.Add(xlWBatWorkSheet, 0);
+Sheet := ExcelApp.Workbooks[1].WorkSheets[1] as ExcelWorksheet;
+//refstyle:=ExcelApp.Application.ReferenceStyle[0];
+ExcelApp.Application.ReferenceStyle[0] := xlA1;
+
+x1:=StrToFloat(Edit1.Text);
+x2:=StrToFloat(Edit2.Text);
+dx:=StrToFloat(Edit3.Text);
+if (x1<0) and (x2>0) then
+    SetLength(masx,round(abs(x1-x2)/dx));
+if (x1>=0) and (x2>0) then
+    SetLength(masx,round((x2-x1)/dx));
+if (x1<=0) and (x2<0) then
+    SetLength(masx,round((-x2+x1)/dx));
+SetLength(masy,length(masx));
+
+ masx[0]:=x1;
+ for i:=round(x1)+1 to round(x2) do
+    begin
+      masx[i]:=round(masx[i-1]+dx);
+    end;
+
+masx[0]:=x1;
+ for i:=0 to length(masx) do
+ begin
+ if masx[i]>=round(pi/2) then
+    masy[i]:=1;
+ if (masx[i]>0) or (masx[i]<=round(pi/4)) then
+    masy[i]:=1+(1+sin(masx[i]))/(1+cos(masx[i]))
+    else
+    masy[i]:=1+sin(masx[i]);
+ end;
+
+ col:='A';
+  Sheet.Range['A1', 'A1'].Value[xlRangeValueDefault]:='X';
+  row:=2;
+ for i:=round(x1) to round(x2) do
+    begin
+      Sheet.Range[col+IntToStr(row), col+IntToStr(row)].Value[xlRangeValueDefault]:=masx[i];
+      row:=row+1;
+    end;
+
+  col:='B';
+  Sheet.Range['B1', 'B1'].Value[xlRangeValueDefault]:='Y';
+  row:=2;
+  for i:=0 to length(masx) do
+    begin
+      Sheet.Range[col+IntToStr(row), col+IntToStr(row)].Value[xlRangeValueDefault]:=masy[i];
+      row:=row+1;
+    end;
+
+sheet.Range['A2','B'+inttostr(row)].Select;
+masshape:=Sheet.Shapes.AddChart(xlXYScatterSmoothNoMarkers,250,1,800,800);
+exchart:=(masshape.Chart as ExcelChart).Location(xlLocationAsNewSheet,EmptyParam);//перемещаем на новую страницу
+ExcelApp.Application.ActiveWorkbook.ActiveChart.SetElement(1);//
+ExcelApp.Application.ActiveWorkbook.ActiveChart.ChartTitle[0].Text:='График функции';//заголовок графика
+MyDisp:=exchart.Axes(xlValue, xlPrimary, 0);//пересечение осей
+
+//ExcelApp.Application.ActiveWorkbook.ActiveChart.Legend.Select;
+//ExcelApp.Application.ActiveWorkbook.ActiveChart.Delete();
+
+//mAxis:=Axis(MyDisp);
+
+mAxis.HasTitle:=True;   //оси координат
+mAxis.AxisTitle.Caption:='X';
+mAxis.HasTitle:=True;
+mAxis.AxisTitle.Caption:='Y';
+
+MyDisp:=exchart.Axes(xlCategory, xlPrimary, 0);
+
+mAxis:=Axis(MyDisp);
+
+
+
+
+
+//ExcelApp.Application.ActiveWorkbook.ActiveChart.SetElement(328);
+
+end;
+
+procedure TForm1.Edit1KeyPress(Sender: TObject; var Key: Char);
+var i:integer;
+begin
+ if not (Key in ['0'..'9','-',',',#8]) then key:=#0;
+  for i:=0 to Length((sender as Tedit).Text) do
+      begin
+if (key=',') and (pos(',',(sender as Tedit).Text)<>0) then key:=#0;
+      end;
+  if (Key=',') and (((sender as Tedit).Text)='') then key:=#0;
+  if (Key='-') and (((sender as Tedit).Text)<>'') then key:=#0;
+end;
+
+
+
+end.

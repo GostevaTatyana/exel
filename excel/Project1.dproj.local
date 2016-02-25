@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.700,C:\Users\Татьяна\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\Татьяна\Desktop\Институт\4 семестр\Автоматизированное проектирование изделий\excel\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.461,C:\Users\Татьяна\Documents\Embarcadero\Studio\Projects\Project1.dproj=C:\Users\Татьяна\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.184,C:\Users\Татьяна\Desktop\Институт\4 семестр\Автоматизированное проектирование изделий\excel\Project1.dproj=C:\Users\Татьяна\Desktop\Институт\4 семестр\Автоматизированное проектирование изделий\excel\Project1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.959,C:\Users\Татьяна\Documents\Embarcadero\Studio\17.0\Imports\Graph_TLB.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.171,=C:\Users\Татьяна\Documents\Embarcadero\Studio\17.0\Imports\Graph_TLB.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.242,C:\Users\Татьяна\Documents\Embarcadero\Studio\Projects\Unit1.dfm=C:\Users\Татьяна\Desktop\Институт\4 семестр\Автоматизированное проектирование изделий\excel\Unit1.dfm</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.178,=C:\Users\Татьяна\Documents\Embarcadero\Studio\17.0\Imports\Office_TLB.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.242,C:\Users\Татьяна\Documents\Embarcadero\Studio\Projects\Unit1.pas=C:\Users\Татьяна\Desktop\Институт\4 семестр\Автоматизированное проектирование изделий\excel\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.733,=C:\Users\Татьяна\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.249,C:\Users\Татьяна\Documents\Embarcadero\Studio\17.0\Imports\Excel_TLB.pas=</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.987,=C:\Users\Татьяна\Documents\Embarcadero\Studio\17.0\Imports\Excel_TLB.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.568,C:\Users\Татьяна\Documents\Embarcadero\Studio\17.0\Imports\Office_TLB.pas=</Transaction>
+  </Transactions>
+	<ProjectSortOrder AutoSort="0" SortType="0">
+    <File Path="Unit1.pas"/>
+    <File Path="Unit1.dfm"/>
+  </ProjectSortOrder>
+</BorlandProject>
